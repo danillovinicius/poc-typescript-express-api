@@ -1,11 +1,11 @@
-import { logger } from '@/services';
+import { verifyJWT } from './../../services/verifyJWT';
 import { NextFunction, Request, Response } from 'express';
 import * as REST from 'request-promise';
 import { BaseRoute } from '../route';
 
 export class ListarProdutosRoute extends BaseRoute {
 
-  public static path = '/listar-produtos';
+  public static path = '/produtos';
   private static instance: ListarProdutosRoute;
 
   private constructor () {
@@ -22,7 +22,7 @@ export class ListarProdutosRoute extends BaseRoute {
   }
 
   private init () {
-    this.router.get('/', this.listarProdutos);
+    this.router.get('/listar', verifyJWT, this.listarProdutos);
   }
 
   private async listarProdutos (req: Request, res: Response, next: NextFunction) {
@@ -37,7 +37,7 @@ export class ListarProdutosRoute extends BaseRoute {
 
   private async encaminharPedidoCompra (req: Request, res: Response, next: NextFunction) {
     REST.post({
-      body : JSON.stringify({'firstname': 'Nicanor'}),
+      body : JSON.stringify({'firstname': 'hh'}),
       url : 'http://httpbin.org/post',
       headers : { 'content-type': 'application/json' },
     }, (error, response, body) => {
