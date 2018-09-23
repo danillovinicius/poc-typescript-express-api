@@ -1,8 +1,8 @@
 import { logger } from '@/services';
 import { NextFunction, Request, Response, Router } from 'express';
+import { PedidoRoute } from './pedido-venda/pedido-venda.route';
 import { ProdutosRoute } from './produtos/produtos.route';
 import { BaseRoute } from './route';
-import { PedidoRoute } from './pedido-venda/pedido.route';
 
 export class ApiRoutes extends BaseRoute {
   public static path = '/api';
@@ -22,10 +22,10 @@ export class ApiRoutes extends BaseRoute {
   }
 
   private init () {
-    logger.info('[FORNECEDOR] Creating api routes.');
     this.router.get('/', this.health);
     this.router.use(ProdutosRoute.path, ProdutosRoute.router);
     this.router.use(PedidoRoute.path, PedidoRoute.router);
+    logger.info('[API FORNECEDOR] it`s running.');
   }
 
   private async health (req: Request, res: Response, next: NextFunction) {

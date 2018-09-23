@@ -1,10 +1,14 @@
 export class Cliente {
-  id: number;
-  nome: string;
-  senha: string;
-  email: string;
-  endereco: string;
-  cidade: string;
-  uf: string;
-  cep: string;
+  public id: number;
+  public nome: string;
+  public senha: string;
+  public email: string;
+  public endereco: string;
+  public cidade: string;
+  public uf: string;
+  public cep: string;
+
+  constructor (values: object = {}) {
+    Object.assign(this, values);
+  }
 }

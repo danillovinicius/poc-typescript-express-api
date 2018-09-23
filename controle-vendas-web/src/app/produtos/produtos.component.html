@@ -1,0 +1,24 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let produto of produtos; index as i" class="col-lg-4 col-md-4 col-sm-4">
+                <div class="image-card card">
+                    <div class="header">
+                        <img [src]="produto?.imagens[0]" />
+                    </div>
+                    <div class="body">
+                        <h4>{{ produto.nome }}</h4>
+                        <div>{{ produto.descricao }}</div>
+                    </div>
+                    <div class="footer">
+                        <h4>{{ produto.valor | currency:'BRL':'pt' }}</h4>
+                        <div class="position">
+                            <button mat-raised-button (click)="incluirNoCarrinho(produto)" class="btn btn-primary btn-round">Incluir
+                                no carrinho</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h3 class="card-title ">Carrinho de compra</h3>
+                        <p *ngIf="produtos.length > 0" class="negrito"> Itens Incluidos Carrinho Compra.</p>
+                        <p *ngIf="produtos.length > 0" class="valor-total pull-right"> Total {{ obterTotalCompra() |
+                            currency:'BRL':'pt' }}</p>
+                    </div>
+                    <div *ngIf="produtos.length > 0" class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>ID</th>
+                                    <th>CÓDIGO</th>
+                                    <th>NOME</th>
+                                    <th>VALOR</th>
+                                    <th>OPÇÃO</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let produto of produtos; index as i">
+                                        <td>
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td>
+                                            {{ produto.codigo }}
+                                        </td>
+                                        <td>
+                                            {{ produto.nome }}
+                                        </td>
+                                        <td class="text-primary">
+                                            {{ produto.valor | currency:'BRL':'pt' }}
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button (click)="remover(produto)" class="btn btn-danger btn-round">Remover</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="produtos.length > 0" class="card-footer">
+                        <button mat-raised-button (click)="finalizarPedido()" class="btn btn-primary btn-round">Finalizar
+                            compra</button>
+                    </div>
+
+                    <div *ngIf="produtos.length === 0" class="card-body">
+                        <p>Ainda não foi incluído nenhum produto no carrinho...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

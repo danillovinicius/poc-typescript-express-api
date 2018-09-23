@@ -1,0 +1,105 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h3 class="card-title ">Pedidos realizados</h3>
+          </div>
+          <div *ngIf="pedidos.length > 0" class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>#</th>
+                  <th>DATA</th>
+                  <th>NOME</th>
+                  <th>VALOR</th>
+                  <th>OPÇÃO</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pedido of pedidos; index as i">
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      {{ pedido.time | date }}
+                    </td>
+                    <td>
+                      {{ pedido.status }}
+                    </td>
+                    <td class="text-primary">
+                      {{ pedido.valor | currency:'BRL':'pt' }}
+                    </td>
+                    <td>
+                      <button *ngIf="pedido.status === 'Pedido recebido'" (click)="cancelar(pedido)" class="btn btn-danger btn-round">Cancelar</button>
+                      <button (click)="visualizar(pedido)" class="btn btn-primary btn-round">Visualizar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div *ngIf="pedidos.length > 0" class="card-footer">
+
+          </div>
+          <div *ngIf="pedidos.length === 0" class="card-footer">
+            <p>Ainda não foi realizado nenhum pedido...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="pedido != undefined" class="card">
+          <div class="card-header card-header-info">
+            <h3 class="card-title ">Detalhe do Pedido</h3>
+          </div>
+
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-md-6">
+                <h3> Código: {{ pedido.cid }} </h3>
+                <h3> Data {{ pedido.time | date:'dd/MM/yyyy' }}</h3>
+              </div>
+              <div class="col-md-6">
+                <h3> Status: {{ pedido.status }}</h3>
+                <h3> Valor Total: {{ pedido.valor | currency:'BRL':'pt' }}</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>#</th>
+                    <th>CÓDIGO</th>
+                    <th>PRODUTO</th>
+                    <th>VALOR</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let produto of pedido.items; index as i">
+                      <td>
+                        {{ i + 1 }}
+                      </td>
+                      <td>
+                        {{ produto.codigo }}
+                      </td>
+                      <td>
+                        {{ produto.nome }}
+                      </td>
+                      <td class="text-primary">
+                        {{ produto.valor | currency:'BRL':'pt' }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

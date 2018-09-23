@@ -1,6 +1,5 @@
-import { verifyJWT } from './../../services/verifyJWT';
 import { NextFunction, Request, Response } from 'express';
-import * as REST from 'request-promise';
+import * as requisition from 'request-promise';
 import { BaseRoute } from '../route';
 
 export class ProdutosRoute extends BaseRoute {
@@ -22,19 +21,16 @@ export class ProdutosRoute extends BaseRoute {
   }
 
   private init () {
-    this.router.get('/listar', verifyJWT, this.listarProdutos);
+    this.router.get('/listar', this.listarProdutos);
   }
 
   private async listarProdutos (req: Request, res: Response, next: NextFunction) {
-    // TODO passar token para validar jwt do outro lado.
-    // TODO olhar get domain (localhost) dinamico hard code
-    // TODO melhorar response de erro ao consumir servico.
-    // TODO necessidade de BaseRoute
-    REST.get('http://localhost:5000/api/produtos/', (error, response, body) => {
+    requisition.get(`${this.ENDPOINT_FORNECEDOR_API}/produtos/listar`, (error, response, body) => {
       if (error) {
-        return res.json(error);
+        res.status(500).send({ mensagem: 'Não foi possível obter a lista de produtos.' });
+        return false;
       }
-      res.json(JSON.parse(body));
+      res.status(200).json(JSON.parse(body));
     });
     return false;
   }

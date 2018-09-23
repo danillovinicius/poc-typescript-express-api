@@ -8,8 +8,7 @@ export const verifyJWT = (req, res, next) => {
 
   jwt.verify(token, config.get('secret'), (err, decoded) => {
     if (err) return res.status(500).send({ auth: false, message: 'Falha ao autenticar o token.' });
-    // OK
-    req.userId = decoded.id;
+    req.user = decoded.user;
     next();
   });
 };

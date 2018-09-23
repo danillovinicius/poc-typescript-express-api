@@ -3,9 +3,10 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { BaseRoute } from './route';
 import { ClienteRoute } from './cliente/cliente.route';
 import { ProdutosRoute } from './produtos/produtos.route';
-import { PedidoRoute } from './pedido-compra/pedido.route';
+import { PedidoRoute } from './pedido-compra/pedido-compra.route';
 
 export class ApiRoutes extends BaseRoute {
+
   public static path = '/api';
   private static instance: ApiRoutes;
 
@@ -23,11 +24,11 @@ export class ApiRoutes extends BaseRoute {
   }
 
   private init () {
-    logger.info('[VENDAS] Creating api routes.');
     this.router.get('/', this.get);
     this.router.use(ProdutosRoute.path, ProdutosRoute.router);
     this.router.use(PedidoRoute.path, PedidoRoute.router);
     this.router.use(ClienteRoute.path, ClienteRoute.router);
+    logger.info('[API VENDAS] it`s running.');
   }
 
   private async get (req: Request, res: Response, next: NextFunction) {

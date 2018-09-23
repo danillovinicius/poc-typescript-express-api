@@ -19,14 +19,17 @@ POC using typescrip and express.
 * POST http://localhost:3000/api/cliente/cadastro
 * POST http://localhost:3000/api/cliente/login
 * GET  http://localhost:3000/api/produtos/listar
+* GET  http://localhost:3000/api/pedido/carrinho
 * POST http://localhost:3000/api/pedido/incluir
 * POST http://localhost:3000/api/pedido/remover
 * POST http://localhost:3000/api/pedido/cancelar
 * POST http://localhost:3000/api/pedido/finalizar
+* GET  http://localhost:3000/api/pedido/listar
 
 ## Fornecedor
 * GET  http://localhost:4000/api/
 * GET  http://localhost:4000/api/produtos/listar
+* POST http://localhost:4000/api/produtos/id
 * POST http://localhost:4000/api/pedido/venda-externa
 * POST http://localhost:4000/api/pedido/atualizar-status
 * POST http://localhost:4000/api/pedido/consultar
